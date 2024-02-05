@@ -1,0 +1,43 @@
+.startLink {
+    background: var(--color-continue);
+    text-decoration: none;
+    color: var(--color-continue-text);
+
+    font-weight: bold;
+
+    padding: var(--element-padding);
+
+    border-radius: 8px;
+    outline: none;
+}
+
+.startLink:hover, .startLink:focus {
+    background: var(--color-continue-discover);
+}
+
+.startLink:active {
+    background: var(--color-continue-active);
+}
+
+.main {
+    padding: 32px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    align-items: baseline;
+
+    max-width: 80ch;
+
+    margin: auto;
+}
+
+.main > section:first-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    align-items: baseline;
+
+    padding-bottom: 8px;
+}

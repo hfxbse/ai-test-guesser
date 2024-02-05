@@ -1,0 +1,44 @@
+:root {
+  --color-continue: hsl(89, 75%, 45%);
+  --color-continue-discover: hsl(89, 75%, 35%);
+  --color-continue-active: hsl(89, 75%, 25%);
+  --color-continue-text: hsl(0, 0%, 100%);
+  --color-background: hsl(0, 0%, 100%);
+  --color-text: hsl(0, 0%, 0%);
+  --color-link: hsl(208, 70%, 40%);
+
+  --element-padding: 8px 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-continue: hsl(89, 60%, 45%);
+    --color-continue-discover: hsl(89, 60%, 35%);
+    --color-continue-active: hsl(89, 60%, 30%);
+    --color-background: hsl(0, 0%, 25%);
+    --color-text: hsl(0, 0%, 100%);
+    --color-link: hsl(208, 80%, 80%);
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+
+  color: var(--color-text);
+  background-color: var(--color-background);
+
+  line-height: 1.5;
+
+}
+
+a {
+  color: var(--color-link);
+  font-size: 1rem;
+}
+
+p {
+  font-size: 1rem;
+}
+
+
