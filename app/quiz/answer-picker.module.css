@@ -4,6 +4,14 @@
     gap: 12px;
 }
 
+.card > :first-child, .card > :first-child > :first-child {
+    flex: 1 1 0;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+}
+
 .categorySelection {
     display: flex;
     justify-content: stretch;
@@ -117,6 +125,8 @@
 }
 
 .freeText {
+    min-height: calc(4rem * 1.5);
+
     border: 1px solid var(--color-text);
     padding: var(--element-padding);
 
