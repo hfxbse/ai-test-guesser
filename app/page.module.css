@@ -1,7 +1,7 @@
 .startLink {
     background: var(--color-continue);
     text-decoration: none;
-    color: var(--color-continue-text);
+    color: var(--color-surface-text) !important;
 
     font-weight: bold;
 

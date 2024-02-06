@@ -1,0 +1,139 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.categorySelection {
+    display: flex;
+    justify-content: stretch;
+}
+
+.categorySelection * {
+    outline: none;
+}
+
+.categorySelection > label {
+    flex: 1 1 0;
+    text-align: center;
+}
+
+.categorySelection input {
+    display: none;
+}
+
+.categorySelection > label > span {
+    padding: var(--element-padding);
+
+    --picker-option-border-radius: 8px;
+
+    background: var(--color-button-inactive);
+
+    display: flex;
+    justify-content: center;
+    align-items: end;
+
+    gap: 0.5ch;
+}
+
+.categorySelection > label > span:hover, .categorySelection > label > span:focus {
+    background: var(--color-focus);
+}
+
+.categorySelection > label > span:hover *, .categorySelection > label > span:focus * {
+    color: var(--color-surface-text);
+}
+
+.categorySelection > label:first-child > span {
+    border-bottom-left-radius: var(--picker-option-border-radius);
+    border-top-left-radius: var(--picker-option-border-radius);
+}
+
+.categorySelection > label:last-child > span {
+    border-bottom-right-radius: var(--picker-option-border-radius);
+    border-top-right-radius: var(--picker-option-border-radius);
+}
+
+
+.categorySelection input:checked + span {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.categorySelection input:checked + span * {
+    color: var(--color-surface-text);
+}
+
+.categorySelection > label > span * {
+    background: transparent;
+}
+
+.icon {
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+.icon + span {
+    line-height: 1.25;
+}
+
+.ratingPicker {
+    display: flex;
+    align-items: center;
+    gap: 1ch;
+}
+
+.ratingPicker > :first-child {
+    font-weight: 100;
+
+    font-size: 1.2rem;
+}
+
+.ratingPicker * {
+    line-height: 1;
+}
+
+.ratingPicker button, .ratingPicker button *{
+    outline: none;
+    border: none;
+
+    height: 2rem;
+    font-size: 2rem;
+}
+
+.ratingPicker button:focus-within {
+    color: var(--color-focus);
+}
+
+.ratingPicker button .active {
+    color: hsl(50, 100%, 40%);
+    font-variation-settings: 'FILL' 1;
+}
+
+@media (prefers-color-scheme: dark) {
+    .ratingPicker button .active {
+        color: hsl(55, 90%, 50%);
+    }
+}
+
+.freeText {
+    border: 1px solid var(--color-text);
+    padding: var(--element-padding);
+
+    outline: none;
+
+    border-radius: 8px;
+
+    font-size: 1rem;
+    font-family: "Roboto", sans-serif;
+}
+
+.freeText:hover, .freeText:focus-within {
+    border-color: var(--color-focus);
+}
+
+@media (prefers-color-scheme: dark) {
+    .freeText::placeholder {
+        color: hsl(0, 0%, 80%);
+    }
+}
