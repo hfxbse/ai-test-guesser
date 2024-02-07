@@ -11,7 +11,7 @@ export default function Quiz() {
             <AnswerPicker id={"02faf8925f845a6438f9997dfbe579e3"} category={TestCategory.FLUTTER_HUMAN}/>
         </div>
         <div>
-            <button>Continue to next quiz</button>
+            <button>Continue to next question</button>
         </div>
     </div>
 }
