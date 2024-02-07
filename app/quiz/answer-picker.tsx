@@ -1,9 +1,9 @@
-// @ts-ignore
-import Gist from "super-react-gist"
 import styles from './answer-picker.module.css'
 import 'material-symbols'
 import {Roboto} from "next/font/google";
 import RatingSelector from "@/app/components/rating-selector";
+import dynamic from "next/dynamic";
+import {ComponentType} from "react";
 
 const roboto = Roboto({weight: "400", subsets: ["latin"]})
 
@@ -18,11 +18,17 @@ export default function AnswerPicker({id, username = "hfxbse", category}: {
     username?: string,
     category: TestCategory,
 }) {
+    const Gist: ComponentType<{
+        id: string,
+        file: string,
+        username: string
+    }> = dynamic(() => import('./gist'), {ssr: false})
+
     const iconClassName = `${styles.icon} material-symbols-outlined`;
 
     return <div className={styles.card}>
         <div>
-            <Gist url={`https://gist.github.com/${username}/${id}`} file={category}/>
+            <Gist file={category} id={id} username={username}/>
             <div className={styles.categorySelection}>
                 <label>
                     <input

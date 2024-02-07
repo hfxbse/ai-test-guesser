@@ -1,6 +1,6 @@
 'use client'
 
-import AnswerPicker, {TestCategory} from "@/app/quiz/answer-picker";
+import AnswerPicker, {TestCategory} from "./answer-picker";
 import styles from './page.module.css'
 
 export default function Quiz() {
