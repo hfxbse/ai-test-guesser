@@ -27,7 +27,8 @@
     --color-background: hsl(0, 0%, 15%);
     --color-text: hsl(0, 0%, 100%);
     --color-link: hsl(208, 80%, 80%);
-    --color-button-inactive: hsl(212, 10%, 45%);
+    --color-primary: hsl(212, 55%, 45%);
+    --color-button-inactive: hsl(212, 5%, 50%);
     --color-input: hsl(212, 0%, 40%);
   }
 }
