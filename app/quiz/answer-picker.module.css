@@ -19,6 +19,7 @@
 
 .categorySelection * {
     outline: none;
+    user-select: none;
 }
 
 .categorySelection > label {
@@ -102,6 +103,8 @@
 }
 
 .ratingPicker button, .ratingPicker button *{
+    user-select: none;
+
     outline: none;
     border: none;
 
