@@ -125,7 +125,8 @@
 }
 
 .freeText {
-    min-height: calc(4rem * 1.5);
+    height: 3lh;
+    min-height: 3lh;
 
     border: 1px solid var(--color-text);
     padding: var(--element-padding);
@@ -136,6 +137,8 @@
 
     font-size: 1rem;
     font-family: "Roboto", sans-serif;
+
+    resize: vertical;
 }
 
 .freeText:hover, .freeText:focus-within {
