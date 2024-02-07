@@ -3,7 +3,7 @@ import Gist from "super-react-gist"
 import styles from './answer-picker.module.css'
 import 'material-symbols'
 import {Roboto} from "next/font/google";
-import {useState} from "react";
+import RatingSelector from "@/app/components/rating-selector";
 
 const roboto = Roboto({weight: "400", subsets: ["latin"]})
 
@@ -18,10 +18,7 @@ export default function AnswerPicker({id, username = "hfxbse", category}: {
     username?: string,
     category: TestCategory,
 }) {
-    const [rating, setRating] = useState(0)
-
-    const materialSymbolsOutlined = 'material-symbols-outlined';
-    const iconClassName = `${styles.icon} ${materialSymbolsOutlined}`;
+    const iconClassName = `${styles.icon} material-symbols-outlined`;
 
     return <div className={styles.card}>
         <div>
@@ -68,17 +65,7 @@ export default function AnswerPicker({id, username = "hfxbse", category}: {
         <textarea className={styles.freeText} placeholder={"Any additional thought or comments?"} maxLength={500}/>
         <div className={styles.ratingPicker}>
             <span className={roboto.className}>Overall rating:</span>
-            <div>
-                {
-                    Array.from(Array(6), (_, index) => {
-                        const active = index <= (rating - 1) ? styles.active : '';
-
-                        return <button key={index} onClick={() => setRating(index + 1)}>
-                            <span className={`${materialSymbolsOutlined} ${active}`}>grade</span>
-                        </button>
-                    })
-                }
-            </div>
+            <RatingSelector/>
         </div>
     </div>
 }

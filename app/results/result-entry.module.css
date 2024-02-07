@@ -1,0 +1,48 @@
+.entry {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bar, .bar > div {
+    height: 1.5lh;
+    width: 100%;
+
+    background: hsl(0, 70%, 45%);
+    border-radius: 8px;
+
+    color: var(--color-surface-text) !important;
+    font-weight: bold;
+}
+
+.bar {
+    display: flex;
+}
+
+.bar > :last-child {
+    flex: 1 1 0;
+
+    color: inherit;
+    background: transparent;
+
+    display: grid;
+    place-items: center;
+}
+
+.bar > div {
+    display: grid;
+    place-items: center;
+
+    width: 69%;
+    background: hsl(91, 70%, 40%);
+}
+
+@media (prefers-color-scheme: dark) {
+    .bar > div {
+        background: hsl(91, 60%, 40%);
+    }
+
+    .bar {
+        background: hsl(0, 60%, 45%);
+    }
+}

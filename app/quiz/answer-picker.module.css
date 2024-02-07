@@ -98,35 +98,6 @@
     font-size: 1.2rem;
 }
 
-.ratingPicker * {
-    line-height: 1;
-}
-
-.ratingPicker button, .ratingPicker button *{
-    user-select: none;
-
-    outline: none;
-    border: none;
-
-    height: 2rem;
-    font-size: 2rem;
-}
-
-.ratingPicker button:focus-within {
-    color: var(--color-focus);
-}
-
-.ratingPicker button .active {
-    color: hsl(50, 100%, 40%);
-    font-variation-settings: 'FILL' 1;
-}
-
-@media (prefers-color-scheme: dark) {
-    .ratingPicker button .active {
-        color: hsl(55, 90%, 50%);
-    }
-}
-
 .freeText {
     height: 3lh;
     min-height: 3lh;
