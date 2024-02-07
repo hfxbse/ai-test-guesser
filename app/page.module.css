@@ -20,14 +20,14 @@
 }
 
 .main {
-    padding: 32px 16px;
+    padding: var(--page-padding);
     display: flex;
     flex-direction: column;
     gap: 12px;
 
     align-items: baseline;
 
-    max-width: 80ch;
+    max-width: var(--page-text-width);
 
     margin: auto;
 }

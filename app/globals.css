@@ -10,7 +10,13 @@
   --color-button-inactive: hsl(212, 10%, 90%);
   --color-focus: hsl(212, 70%, 65%);
 
+  --color-input: hsl(212, 0%, 92%);
+
+
   --element-padding: 8px 16px;
+
+  --page-padding: 32px 16px;
+  --page-text-width: 80ch;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,6 +28,7 @@
     --color-text: hsl(0, 0%, 100%);
     --color-link: hsl(208, 80%, 80%);
     --color-button-inactive: hsl(212, 10%, 45%);
+    --color-input: hsl(212, 0%, 40%);
   }
 }
 
