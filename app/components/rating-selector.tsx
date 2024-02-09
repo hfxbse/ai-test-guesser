@@ -3,13 +3,18 @@ import {useState} from "react";
 
 import 'material-symbols'
 
-export default function RatingSelector({disabled = false, rating = 0}: { disabled?: boolean, rating?: number }) {
+export default function RatingSelector({disabled = false, rating = 0, onChange}: {
+    disabled?: boolean,
+    rating?: number,
+    onChange?: (rating: number) => void
+}) {
     const materialSymbolsOutlined = "material-symbols-outlined";
     const [ratingState, setRatingState] = useState(rating)
 
     function setRating(rating: number) {
         setRatingState(rating)
-        dispatchEvent(new CustomEvent('change', {detail: {rating}}))
+
+        if (onChange !== undefined) onChange(rating)
     }
 
     return <div className={styles.ratingPicker}>

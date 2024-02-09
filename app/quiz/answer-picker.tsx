@@ -3,68 +3,120 @@ import 'material-symbols'
 import {Roboto} from "next/font/google";
 import RatingSelector from "@/app/components/rating-selector";
 import dynamic from "next/dynamic";
-import {ComponentType} from "react";
+import {ComponentType, FormEvent, useRef} from "react";
 
 const roboto = Roboto({weight: "400", subsets: ["latin"]})
 
-export default function AnswerPicker(gist: {
-    id: string,
-    username: string,
-    file: string,
+type Guess = null | 'human' | 'copilot' | 'generated'
+type Text = null | string
+type Rating = null | number
+
+export interface AnswerState {
+    guess: Guess
+    rating: Rating,
+    text: Text
+}
+
+interface RadioButton {
+    value: Guess,
+    label: string,
+    icon: string
+}
+
+const radios: RadioButton[] = [
+    {
+        value: 'human',
+        icon: 'person',
+        label: 'Human'
+    },
+    {
+        value: 'copilot',
+        icon: 'cognition',
+        label: 'Copilot'
+    },
+    {
+        value: 'generated',
+        icon: 'manufacturing',
+        label: 'AI generated'
+    },
+]
+
+export default function AnswerPicker({gistId, gistUsername, gistFile, onChange}: {
+    gistId: string,
+    gistUsername: string,
+    gistFile: string,
+    onChange?: (state: AnswerState) => void
 }) {
+    const guess = useRef<Guess>(null)
+    const text = useRef<Text>(null)
+    const rating = useRef<Rating>(null)
+
+    function onGuessChange(event: FormEvent) {
+        const radio = event.target as HTMLInputElement;
+        guess.current = radio.value as Guess
+        notifyListener()
+    }
+
+    function onTexChange(event: FormEvent<HTMLTextAreaElement>) {
+        const textArea = event.target as HTMLTextAreaElement
+        const input = textArea.value.trim()
+
+        text.current = input.length > 0 ? input : null
+        notifyListener()
+    }
+
+    function onRatingChange(event: number) {
+        rating.current = event
+        notifyListener()
+    }
+
+    function notifyListener() {
+        if (onChange !== undefined) onChange({
+            rating: rating.current,
+            guess: guess.current,
+            text: text.current
+        })
+    }
+
     const Gist: ComponentType<{
         id: string,
         file: string,
         username: string
     }> = dynamic(() => import('./gist'), {ssr: false})
-
     const iconClassName = `${styles.icon} material-symbols-outlined`;
-
-    const radioGroup = `${gist.id}.${gist.file}.guess}`;
+    const radioGroup = `${gistUsername}.${gistId}.${gistFile}.guess}`;
 
     return <div className={styles.card}>
         <div>
-            <Gist {...gist}/>
-            <div className={styles.categorySelection}>
-                <label>
-                    <input
-                        tabIndex={0}
-                        type="radio"
-                        name={radioGroup}
-                    />
-                    <span>
-                    <span className={iconClassName}>person</span>
-                    <span>Human</span>
-                </span>
-                </label>
-                <label>
-                    <input
-                        tabIndex={0}
-                        type="radio"
-                        name={radioGroup}
-                    />
-                    <span>
-                    <span className={iconClassName}>cognition</span>
-                    <span>Copilot</span>
-                </span>
-                </label>
-                <label>
-                    <input
-                        tabIndex={0}
-                        type="radio"
-                        name={radioGroup}
-                    />
-                    <span>
-                    <span className={iconClassName}>manufacturing</span>
-                    <span>AI generated</span>
-                </span>
-                </label>
+            <Gist file={gistFile} username={gistUsername} id={gistId}/>
+            <div className={styles.categorySelection} onChange={onGuessChange}>
+                {
+                    radios.map(radio =>
+                        <label key={radio.value}>
+                            <input
+                                tabIndex={0}
+                                type="radio"
+                                name={radioGroup}
+                                value={radio.value as string}
+                            />
+                            <span>
+                                <span className={iconClassName}>{radio.icon}</span>
+                                <span>{radio.label}</span>
+                            </span>
+                        </label>
+                    )
+                }
             </div>
         </div>
-        <textarea className={styles.freeText} placeholder={"Any additional thought or comments?"} maxLength={500}/>
+        <textarea
+            className={styles.freeText}
+            placeholder={"Any additional thought or comments?"}
+            maxLength={500}
+            onChange={onTexChange}
+        />
         <div className={styles.ratingPicker}>
             <span className={roboto.className}>Overall rating:</span>
-            <RatingSelector/>
+            <RatingSelector onChange={onRatingChange}/>
         </div>
     </div>
 }
