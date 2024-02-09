@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "array-shuffle": "^3.0.0",
     "material-symbols": "^0.14.7",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.0.1",
+    "react-spinners": "^0.13.8",
     "super-react-gist": "^1.1.1"
   },
   "devDependencies": {

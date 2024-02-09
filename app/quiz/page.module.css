@@ -1,3 +1,20 @@
+.placeholder {
+    padding: var(--page-padding);
+    display: grid;
+    place-items: center;
+
+    height: calc(100svh - 64px);
+}
+
+.placeholder > div {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 32px;
+}
+
 .page {
     height: 100svh;
     overflow: auto;

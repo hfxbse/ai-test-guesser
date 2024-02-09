@@ -7,16 +7,10 @@ import {ComponentType} from "react";
 
 const roboto = Roboto({weight: "400", subsets: ["latin"]})
 
-export enum TestCategory {
-    FLUTTER_HUMAN = "reference.dart",
-    FLUTTER_COPILOT = "copilot.dart",
-    FLUTTER_WELLTESTED = "welltested.dart"
-}
-
-export default function AnswerPicker({id, username = "hfxbse", category}: {
+export default function AnswerPicker(gist: {
     id: string,
-    username?: string,
-    category: TestCategory,
+    username: string,
+    file: string,
 }) {
     const Gist: ComponentType<{
         id: string,
@@ -26,16 +20,17 @@ export default function AnswerPicker({id, username = "hfxbse", category}: {
 
     const iconClassName = `${styles.icon} material-symbols-outlined`;
 
+    const radioGroup = `${gist.id}.${gist.file}.guess}`;
+
     return <div className={styles.card}>
         <div>
-            <Gist file={category} id={id} username={username}/>
+            <Gist {...gist}/>
             <div className={styles.categorySelection}>
                 <label>
                     <input
                         tabIndex={0}
                         type="radio"
-                        name={`${id}.${category}.guess}`}
-                        value={TestCategory.FLUTTER_HUMAN}
+                        name={radioGroup}
                     />
                     <span>
                     <span className={iconClassName}>person</span>
@@ -46,9 +41,8 @@ export default function AnswerPicker({id, username = "hfxbse", category}: {
                     <input
                         tabIndex={0}
                         type="radio"
-                        name={`${id}.${category}.guess}`}
-
-                        value={TestCategory.FLUTTER_COPILOT}/>
+                        name={radioGroup}
+                    />
                     <span>
                     <span className={iconClassName}>cognition</span>
                     <span>Copilot</span>
@@ -58,8 +52,7 @@ export default function AnswerPicker({id, username = "hfxbse", category}: {
                     <input
                         tabIndex={0}
                         type="radio"
-                        name={`${id}.${category}.guess}`}
-                        value={TestCategory.FLUTTER_WELLTESTED}
+                        name={radioGroup}
                     />
                     <span>
                     <span className={iconClassName}>manufacturing</span>
