@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "pages:dev": "wrangler pages dev .vercel/output/static --compatibility-flag=nodejs_compat  --compatibility-date=2024-02-09"
   },
   "dependencies": {
     "array-shuffle": "^3.0.0",
@@ -20,11 +22,13 @@
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.8.6",
+    "@cloudflare/workers-types": "^4.20240208.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^3.28.1"
   }
 }

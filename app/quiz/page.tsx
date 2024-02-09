@@ -41,11 +41,12 @@ export default function Quiz() {
     return <div className={styles.page}>
         <div className={styles.snippets}>
             {
-                arrayShuffle(gist.filenames).map(file => <AnswerPicker
-                    id={gist.id}
-                    username={gist.github_username}
-                    file={file}
-                    key={file}
+                gist.filenames.map(file => <AnswerPicker
+                    key={`${gist.gist_user}.${gist.id}.${gist.id}.${gist.filenames}`}
+
+                    gistId={gist.id}
+                    gistUsername={gist.gist_user}
+                    gistFile={file}
                 />)
             }
         </div>
