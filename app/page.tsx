@@ -1,6 +1,7 @@
 import {ReactElement} from "react";
 import styles from "./page.module.css"
 import {Roboto} from "next/font/google";
+import Link from "next/link";
 
 const roboto = Roboto({weight: "300", subsets: ['latin']})
 
@@ -32,7 +33,7 @@ export default function Home(): ReactElement {
                 </p>
             </section>
 
-            <a href="/quiz" className={styles.startLink}>Sounds good, let&apos;s start</a>
+            <Link href={"/quiz"} className={styles.startLink}>Sounds good, let&apos;s start</Link>
         </main>
     </div>;
 }
