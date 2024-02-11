@@ -9,6 +9,7 @@
   --color-primary: hsl(212, 60%, 45%);
   --color-button-inactive: hsl(212, 10%, 90%);
   --color-focus: hsl(212, 70%, 65%);
+  --color-error: hsl(0, 100%, 50%);
 
   --color-input: hsl(212, 0%, 92%);
 
@@ -30,6 +31,7 @@
     --color-primary: hsl(212, 55%, 45%);
     --color-button-inactive: hsl(212, 5%, 50%);
     --color-input: hsl(212, 0%, 40%);
+    --color-error: hsl(0, 75%, 50%);
   }
 }
 

@@ -3,7 +3,7 @@ import 'material-symbols'
 import {Roboto} from "next/font/google";
 import RatingSelector from "@/app/components/rating-selector";
 import dynamic from "next/dynamic";
-import {ComponentType, FormEvent, useRef} from "react";
+import {ComponentType, FormEvent, useMemo} from "react";
 
 const roboto = Roboto({weight: "400", subsets: ["latin"]})
 
@@ -41,40 +41,35 @@ const radios: RadioButton[] = [
     },
 ]
 
-export default function AnswerPicker({gistId, gistUsername, gistFile, onChange}: {
+export default function AnswerPicker({gistId, gistUsername, gistFile, setAnswer, answer}: {
     gistId: string,
     gistUsername: string,
     gistFile: string,
-    onChange?: (state: AnswerState) => void
+    answer: AnswerState,
+    setAnswer?: (answer: AnswerState) => void
 }) {
-    const guess = useRef<Guess>(null)
-    const text = useRef<Text>(null)
-    const rating = useRef<Rating>(null)
 
     function onGuessChange(event: FormEvent) {
         const radio = event.target as HTMLInputElement;
-        guess.current = radio.value as Guess
-        notifyListener()
+        updateAnswer({guess: radio.value as Guess})
     }
 
     function onTexChange(event: FormEvent<HTMLTextAreaElement>) {
         const textArea = event.target as HTMLTextAreaElement
         const input = textArea.value.trim()
 
-        text.current = input.length > 0 ? input : null
-        notifyListener()
+        updateAnswer({text: input.length > 0 ? input : null})
     }
 
-    function onRatingChange(event: number) {
-        rating.current = event
-        notifyListener()
-    }
-
-    function notifyListener() {
-        if (onChange !== undefined) onChange({
-            rating: rating.current,
-            guess: guess.current,
-            text: text.current
+    function updateAnswer({rating, guess, text}: {
+        rating?: undefined | Rating,
+        guess?: undefined | Guess,
+        text?: undefined | Text,
+    }) {
+        if (setAnswer !== undefined) setAnswer({
+            rating: rating ?? answer.rating,
+            guess: guess ?? answer.guess,
+            text: text ?? answer.text
         })
     }
 
@@ -82,7 +77,8 @@ export default function AnswerPicker({gistId, gistUsername, gistFile, onChange}:
         id: string,
         file: string,
         username: string
-    }> = dynamic(() => import('./gist'), {ssr: false})
+    }> = useMemo(() => dynamic(() => import('./gist'), {ssr: false}), [])
+
     const iconClassName = `${styles.icon} material-symbols-outlined`;
     const radioGroup = `${gistUsername}.${gistId}.${gistFile}.guess}`;
 
@@ -116,7 +112,7 @@ export default function AnswerPicker({gistId, gistUsername, gistFile, onChange}:
         />
         <div className={styles.ratingPicker}>
             <span className={roboto.className}>Overall rating:</span>
-            <RatingSelector onChange={onRatingChange}/>
+            <RatingSelector onChange={rating => updateAnswer({rating})}/>
         </div>
     </div>
 }

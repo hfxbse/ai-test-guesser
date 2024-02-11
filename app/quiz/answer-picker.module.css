@@ -33,6 +33,7 @@
 
 .categorySelection > label > span {
     padding: var(--element-padding);
+    height: calc(100% - 16px);
 
     --picker-option-border-radius: 8px;
 
