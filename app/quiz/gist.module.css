@@ -1,0 +1,14 @@
+.placeholder {
+    flex: 1 0;
+    padding: var(--page-padding);
+
+    display: grid !important;
+    place-items: center;
+}
+
+.placeholder > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1lh;
+}

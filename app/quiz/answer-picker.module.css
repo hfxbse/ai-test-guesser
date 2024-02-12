@@ -14,7 +14,9 @@
 
 .categorySelection {
     display: flex;
+    flex-direction: row !important;
     justify-content: stretch;
+    flex: 0 !important;
 }
 
 .categorySelection * {
