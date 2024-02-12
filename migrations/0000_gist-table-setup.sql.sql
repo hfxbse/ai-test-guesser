@@ -7,8 +7,12 @@ CREATE TABLE IF NOT EXISTS gists
     file_human     TEXT NOT NULL,
     file_copilot   TEXT NOT NULL,
     file_generated TEXT NOT NULL,
-    PRIMARY KEY (gist_id, gist_user)
+    PRIMARY KEY (gist_id, gist_user),
+    check ( trim(gist_id) <> '' ),
+    check ( trim(gist_user) <> '' ),
+    check ( trim(file_human) <> '' ),
+    check ( trim(file_copilot) <> '' ),
+    check ( trim(file_generated) <> '' )
 );
 
-CREATE UNIQUE INDEX gist_uuid ON gists (gist_id, gist_user);
-
+CREATE UNIQUE INDEX gists_identifier ON gists (gist_id, gist_user);
