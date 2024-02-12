@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "array-shuffle": "^3.0.0",
+    "hex-to-array-buffer": "^2.0.0",
     "material-symbols": "^0.14.7",
     "next": "14.1.0",
     "react": "^18",

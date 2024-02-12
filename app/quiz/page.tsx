@@ -1,5 +1,7 @@
 'use client'
 
+export const runtime = 'edge'
+
 import AnswerPicker, {AnswerState} from "./answer-picker";
 import styles from './page.module.css'
 import {useEffect, useRef, useState} from "react";
@@ -8,17 +10,9 @@ import arrayShuffle from "array-shuffle";
 import {BarLoader} from "react-spinners";
 import {Roboto} from "next/font/google";
 import {useRouter} from "next/navigation";
+import {QuizResponse, submitResponses} from "@/app/quiz/action";
 
 const roboto = Roboto({weight: "300", subsets: ["latin"]})
-
-interface QuizResponse {
-    gist_id: string,
-    gist_user: string,
-    files: {
-        file: string,
-        answer: AnswerState
-    }[]
-}
 
 function useGists() {
     const [gists, setGists] = useState<Gist[]>([])
@@ -80,8 +74,9 @@ function placeholder() {
 }
 
 export default function Quiz() {
+    const startTime = useRef(Date.now())
     const {gists, setGists} = useGists()
-    const {answers, updateAnswer, saveResponse} = useQuizResponses()
+    const {answers, updateAnswer, responses, saveResponse} = useQuizResponses()
     const router = useRouter()
     const page = useRef<HTMLDivElement>(null)
 
@@ -91,13 +86,17 @@ export default function Quiz() {
 
     let gist = gists[0];
 
-    function proceedQuiz() {
+    async function proceedQuiz() {
         saveResponse(gist.id, gist.gist_user)
 
         if (gists.length > 1) {
             setGists(gists.slice(1))
             page.current?.scrollTo({top: 0, left: 0, behavior: 'instant'})
         } else {
+            await submitResponses({
+                quizResponses: responses.current,
+                quizDuration: Date.now() - startTime.current
+            })
             router.push('/survey')
         }
     }

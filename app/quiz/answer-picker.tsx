@@ -7,7 +7,7 @@ import {ComponentType, FormEvent, useMemo} from "react";
 
 const roboto = Roboto({weight: "400", subsets: ["latin"]})
 
-type Guess = null | 'human' | 'copilot' | 'generated'
+type Guess = null | 'human' | 'copilot' | 'ai-generated'
 type Text = null | string
 type Rating = null | number
 
@@ -35,7 +35,7 @@ const radios: RadioButton[] = [
         label: 'Copilot'
     },
     {
-        value: 'generated',
+        value: 'ai-generated',
         icon: 'manufacturing',
         label: 'AI generated'
     },

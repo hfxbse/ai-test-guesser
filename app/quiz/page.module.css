@@ -73,7 +73,7 @@
     background: var(--color-continue-discover);
 }
 
-.page > :last-child button:active {
+.page > :last-child button:not(:disabled):active {
     background: var(--color-continue-active);
 }
 
