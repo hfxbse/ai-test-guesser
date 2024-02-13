@@ -1,5 +1,10 @@
 import hexToArrayBuffer from "hex-to-array-buffer";
 
 export default function uuidToBuffer(uuid: string) {
-    return hexToArrayBuffer(uuid.replaceAll('-', ''))
+    try {
+        return hexToArrayBuffer(uuid.replaceAll('-', ''))
+    } catch (e) {
+        if (e instanceof RangeError) return null
+        else throw e
+    }
 }

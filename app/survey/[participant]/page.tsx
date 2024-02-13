@@ -22,9 +22,7 @@ export default async function Survey({params}: { params: { participant: string }
             "SELECT 1 FROM participants WHERE uuid = ?1"
         ).bind(participantUUID).first()
 
-        if (participant === null) {
-            redirect('/quiz')
-        }
+        if (participant === null) redirect('/')
 
         const survey = await db.prepare(
             "SELECT 1 FROM surveys WHERE participant_uuid = ?1"
