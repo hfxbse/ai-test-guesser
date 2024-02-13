@@ -38,5 +38,3 @@ CREATE TABLE IF NOT EXISTS quiz_responses
 
     PRIMARY KEY (participant_uuid, gist_id, gist_user)
 );
-
-CREATE UNIQUE INDEX quiz_responses_identifier ON quiz_responses (participant_uuid, gist_id, gist_user);

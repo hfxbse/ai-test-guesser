@@ -14,5 +14,3 @@ CREATE TABLE IF NOT EXISTS gists
     check ( trim(file_copilot) <> '' ),
     check ( trim(file_generated) <> '' )
 );
-
-CREATE UNIQUE INDEX gists_identifier ON gists (gist_id, gist_user);
