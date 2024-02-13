@@ -122,6 +122,6 @@
 }
 
 .issue {
-    height: 1lh;
+    min-height: 1lh;
     color: var(--color-error);
 }
