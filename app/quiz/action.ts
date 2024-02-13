@@ -59,7 +59,7 @@ async function snippetResponseCreation({db, quizResponses}: {
                 },
                 human: mapFile('human'),
                 copilot: mapFile('copilot'),
-                generated: mapFile('generated')
+                generated: mapFile('ai_generated')
             }
         })
     }
@@ -146,8 +146,13 @@ export async function submitResponses(responses: Response) {
     const snippetCreationResults = mapSnippetCreationResponses(creationResults.slice(1))
 
     const createQuizResults = db.prepare(`
-        INSERT INTO quiz_responses (participant_uuid, gist_id, gist_user, response_human, response_copilot,
-                                    response_ai_generated)
+        INSERT INTO quiz_responses
+        (participant_uuid,
+         gist_id,
+         gist_user,
+         response_human,
+         response_copilot,
+         response_ai_generated)
         VALUES (?1, ?2, ?3, ?4, ?5, ?6);
     `)
 

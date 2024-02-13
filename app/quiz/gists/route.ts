@@ -26,7 +26,7 @@ export async function GET() {
             filenames: arrayShuffle([
                 entry["file_human"],
                 entry["file_copilot"],
-                entry["file_generated"],
+                entry["file_ai_generated"],
             ] as string[])
         }
     })
