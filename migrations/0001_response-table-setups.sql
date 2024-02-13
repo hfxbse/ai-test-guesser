@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS participants
 (
     uuid          BLOB PRIMARY KEY,
     quiz_duration INT NOT NULL,
+    date          DATETIME DEFAULT current_timestamp,
     check ( quiz_duration > 0 ),
     check ( length(uuid) = 16 )
 );
