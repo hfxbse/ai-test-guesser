@@ -1,7 +1,7 @@
 "use server"
 
 import {AnswerState} from "@/app/quiz/answer-picker";
-import hexToArrayBuffer from "hex-to-array-buffer";
+import uuidToBuffer from "@/app/uuidToBuffer";
 
 export interface Response {
     quizDuration: number,
@@ -18,7 +18,9 @@ export interface QuizResponse {
 }
 
 function participantCreation({db, quizDuration}: { db: D1Database, quizDuration: number }) {
-    const participantUUID = hexToArrayBuffer(crypto.randomUUID().replaceAll('-', ''))
+    const participantUUIDString = crypto.randomUUID()
+
+    const participantUUID = uuidToBuffer(participantUUIDString)
 
     const participantCreation = db.prepare(`
         INSERT INTO participants (uuid, quiz_duration)
@@ -27,6 +29,7 @@ function participantCreation({db, quizDuration}: { db: D1Database, quizDuration:
 
     return {
         participantUUID,
+        participantUUIDString,
         participantCreationStatement: participantCreation.bind(participantUUID, quizDuration)
     }
 }
@@ -123,7 +126,7 @@ async function snippetResponseCreation({db, quizResponses}: {
 export async function submitResponses(responses: Response) {
     const db = process.env.DB;
 
-    const {participantUUID, participantCreationStatement} = participantCreation({
+    const {participantUUID, participantCreationStatement, participantUUIDString} = participantCreation({
         db,
         quizDuration: responses.quizDuration
     });
@@ -162,4 +165,6 @@ export async function submitResponses(responses: Response) {
             getGeneratedId(result.generated),
         );
     }))
+
+    return {participantUUID: participantUUIDString}
 }

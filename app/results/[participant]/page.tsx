@@ -2,8 +2,10 @@
 
 import {Roboto} from "next/font/google";
 import styles from './page.module.css'
-import ResultEntry from "@/app/results/result-entry";
+import ResultEntry from "@/app/results/[participant]/result-entry";
 import RatingSelector from "@/app/components/rating-selector";
+
+export const runtime = 'edge'
 
 const roboto = Roboto({weight: "300", subsets: ["latin"]})
 

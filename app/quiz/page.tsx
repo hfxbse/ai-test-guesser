@@ -93,11 +93,12 @@ export default function Quiz() {
             setGists(gists.slice(1))
             page.current?.scrollTo({top: 0, left: 0, behavior: 'instant'})
         } else {
-            await submitResponses({
+            const {participantUUID} = await submitResponses({
                 quizResponses: responses.current,
                 quizDuration: Date.now() - startTime.current
             })
-            router.push('/survey')
+
+            router.push(`/survey/${participantUUID}`)
         }
     }
 
