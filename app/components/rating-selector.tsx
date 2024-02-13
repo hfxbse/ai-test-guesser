@@ -1,3 +1,5 @@
+"use client"
+
 import styles from "./rating-selector.module.css";
 import {useState} from "react";
 
