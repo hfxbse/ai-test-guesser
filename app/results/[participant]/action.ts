@@ -14,32 +14,35 @@ export default async function loadResults(uuid: string) {
 
     if (participant === null) redirect('/')
 
-    function readResults(results: D1Result[]) {
-        const firstResult = results[0].results[0] as Record<string, number>
+    function readResults(result: D1Result) {
+        if (result.error !== undefined) throw result.error
 
-        if (results[0] === undefined || results[0]?.error !== undefined) {
-            throw results[0]?.error ?? 'Response count is missing'
+        const fields = result.results[0] as {
+            ratingHuman?: number,
+            ratingCopilot?: number,
+            ratingAiGenerated?: number,
+            certaintyHuman: number,
+            certaintyCopilot: number,
+            certaintyAiGenerated: number,
         }
-
-        function getCount(result: D1Result) {
-            return (result.results as [{ "count(*)": number }])[0]["count(*)"]
-        }
-
-        const answerCount = getCount(results[0])
 
         const percentages = {
-            human: getCount(results[1]) * 100 / answerCount,
-            copilot: getCount(results[2]) * 100 / answerCount,
-            aiGenerated: getCount(results[3]) * 100 / answerCount,
+            human: fields.certaintyHuman * 100,
+            copilot: fields.certaintyCopilot * 100,
+            aiGenerated: fields.certaintyAiGenerated * 100
         }
 
-        if (firstResult["sum(human.rating)"] !== undefined) {
+        let noUndefined = fields.certaintyHuman !== undefined
+        noUndefined = noUndefined && fields.certaintyCopilot !== undefined
+        noUndefined = noUndefined && fields.certaintyAiGenerated !== undefined
+
+        if (noUndefined) {
             return {
                 percentages,
                 ratings: {
-                    human: firstResult["sum(human.rating)"],
-                    copilot: firstResult["sum(copilot.rating)"],
-                    aiGenerated: firstResult["sum(ai_generated.rating)"]
+                    human: fields.ratingHuman,
+                    copilot: fields.ratingCopilot,
+                    aiGenerated: fields.ratingAiGenerated
                 }
             }
         }
@@ -48,9 +51,14 @@ export default async function loadResults(uuid: string) {
     }
 
     const results = await db.batch([
-        // participant correct responses
+        // participant responses
         db.prepare(`
-            SELECT count(*), sum(human.rating), sum(copilot.rating), sum(ai_generated.rating)
+            SELECT AVG(human.rating)                                                    AS ratingHuman,
+                   AVG(copilot.rating)                                                  AS ratingCopilot,
+                   AVG(ai_generated.rating)                                             AS ratingAiGenerated,
+                   AVG(CASE WHEN human.guess = 'human' THEN 1 ELSE 0 END)               AS certaintyHuman,
+                   AVG(CASE WHEN copilot.guess = 'copilot' THEN 1 ELSE 0 END)           AS certaintyCopilot,
+                   AVG(CASE WHEN ai_generated.guess = 'ai-generated' THEN 1 ELSE 0 END) AS certaintyAiGenerated
             FROM quiz_responses
                      LEFT JOIN snippet_responses AS human ON quiz_responses.response_human = human.id
                      LEFT JOIN snippet_responses AS copilot ON quiz_responses.response_copilot = copilot.id
@@ -59,56 +67,22 @@ export default async function loadResults(uuid: string) {
             WHERE quiz_responses.participant_uuid = ?1
         `).bind(participantUUID),
 
+        // average responses other participants
         db.prepare(`
-            SELECT count(*)
+            SELECT AVG(CASE WHEN human.guess = 'human' THEN 1 ELSE 0 END)               AS certaintyHuman,
+                   AVG(CASE WHEN copilot.guess = 'copilot' THEN 1 ELSE 0 END)           AS certaintyCopilot,
+                   AVG(CASE WHEN ai_generated.guess = 'ai-generated' THEN 1 ELSE 0 END) AS certaintyAiGenerated
             FROM quiz_responses
-                     INNER JOIN snippet_responses ON quiz_responses.response_human = snippet_responses.id
-            WHERE quiz_responses.participant_uuid = ?1
-              AND snippet_responses.guess = 'human'
-        `).bind(participantUUID),
-        db.prepare(`
-            SELECT count(*)
-            FROM quiz_responses
-                     INNER JOIN snippet_responses ON quiz_responses.response_copilot = snippet_responses.id
-            WHERE quiz_responses.participant_uuid = ?1
-              AND snippet_responses.guess = 'copilot'
-        `).bind(participantUUID),
-        db.prepare(`
-            SELECT count(*)
-            FROM quiz_responses
-                     INNER JOIN snippet_responses ON quiz_responses.response_ai_generated = snippet_responses.id
-            WHERE quiz_responses.participant_uuid = ?1
-              AND snippet_responses.guess = 'ai-generated'
-        `).bind(participantUUID),
-
-        // average correct responses
-        db.prepare("SELECT count(*) FROM quiz_responses WHERE participant_uuid <> ?1").bind(participantUUID),
-        db.prepare(`
-            SELECT count(*)
-            FROM quiz_responses
-                     INNER JOIN snippet_responses ON quiz_responses.response_human = snippet_responses.id
+                     LEFT JOIN snippet_responses AS human ON quiz_responses.response_human = human.id
+                     LEFT JOIN snippet_responses AS copilot ON quiz_responses.response_copilot = copilot.id
+                     LEFT JOIN snippet_responses AS ai_generated
+                               ON quiz_responses.response_ai_generated = ai_generated.id
             WHERE quiz_responses.participant_uuid <> ?1
-              AND snippet_responses.guess = 'human'
         `).bind(participantUUID),
-        db.prepare(`
-            SELECT count(*)
-            FROM quiz_responses
-                     INNER JOIN snippet_responses ON quiz_responses.response_copilot = snippet_responses.id
-            WHERE quiz_responses.participant_uuid <> ?1
-              AND snippet_responses.guess = 'copilot'
-        `).bind(participantUUID),
-        db.prepare(`
-            SELECT count(*)
-            FROM quiz_responses
-                     INNER JOIN snippet_responses ON quiz_responses.response_ai_generated = snippet_responses.id
-            WHERE quiz_responses.participant_uuid <> ?1
-              AND snippet_responses.guess = 'ai-generated'
-        `).bind(participantUUID),
-
     ])
 
-    const participantResults = readResults(results.splice(0, 4))
-    const averageResults = readResults(results.splice(0, 4))
+    const participantResults = readResults(results.splice(0, 1)[0])
+    const averageResults = readResults(results.splice(0, 1)[0])
 
     return {
         participantResults,
