@@ -38,3 +38,5 @@ next-env.d.ts
 .idea
 .wrangler
 wrangler.toml
+
+migrations/0003_seed-gists.sql
