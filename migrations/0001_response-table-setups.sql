@@ -29,11 +29,11 @@ CREATE TABLE IF NOT EXISTS quiz_responses
 
     response_human     INT  NOT NULL,
     response_copilot   INT  NOT NULL,
-    response_generated INT  NOT NULL,
+    response_ai_generated INT  NOT NULL,
 
     FOREIGN KEY (response_human) REFERENCES snippet_responses (id),
     FOREIGN KEY (response_copilot) REFERENCES snippet_responses (id),
-    FOREIGN KEY (response_generated) REFERENCES snippet_responses (id),
+    FOREIGN KEY (response_ai_generated) REFERENCES snippet_responses (id),
     FOREIGN KEY (participant_uuid) REFERENCES participants (uuid),
     FOREIGN KEY (gist_id, gist_user) REFERENCES gists (gist_id, gist_user),
 

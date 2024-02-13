@@ -147,7 +147,7 @@ export async function submitResponses(responses: Response) {
 
     const createQuizResults = db.prepare(`
         INSERT INTO quiz_responses (participant_uuid, gist_id, gist_user, response_human, response_copilot,
-                                    response_generated)
+                                    response_ai_generated)
         VALUES (?1, ?2, ?3, ?4, ?5, ?6);
     `)
 
