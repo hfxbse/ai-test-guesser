@@ -23,7 +23,7 @@ export default function RatingSelector({disabled = false, rating = 0, onChange}:
         {
             Array.from(Array(6), (_, index) => {
                 const active = index <= (ratingState - 0.5) ? styles.active : '';
-                const icon = (ratingState - index) <= 0 || (ratingState - index) > 0.5 ?
+                const icon = (ratingState - index) <= 0.5 || (ratingState - index) >= 1 ?
                     'grade' :
                     'star_rate_half';
 
