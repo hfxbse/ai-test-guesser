@@ -4,10 +4,16 @@ import ResultEntry from "@/app/results/[participant]/result-entry";
 import RatingSelector from "@/app/components/rating-selector";
 import loadResults from "@/app/results/[participant]/action";
 import {useMemo} from "react";
+import {Metadata} from "next";
+import {metadata as layoutMeta} from "@/app/layout";
 
 export const runtime = 'edge'
 
 const roboto = Roboto({weight: "300", subsets: ["latin"]})
+
+export const metadata: Metadata = {
+    title: `Results - ${layoutMeta.title}`,
+}
 
 export default async function Results({params}: { params: { participant: string } }) {
     const uuid = params.participant

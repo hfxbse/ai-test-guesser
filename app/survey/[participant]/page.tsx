@@ -3,8 +3,14 @@ import {Roboto} from "next/font/google";
 import uuidToBuffer from "@/app/uuidToBuffer";
 import {permanentRedirect, redirect} from "next/navigation";
 import {revalidatePath} from "next/cache";
+import {Metadata} from "next";
+import {metadata as layoutMeta} from "@/app/layout";
 
 const roboto = Roboto({weight: "300", subsets: ["latin"]})
+
+export const metadata: Metadata = {
+    title: `Post quiz survey - ${layoutMeta.title}`,
+}
 
 export const runtime = 'edge';
 
