@@ -1,7 +1,6 @@
 'use client'
 
-export const runtime = 'edge'
-
+import Reference from "./reference/reference";
 import AnswerPicker, {AnswerState} from "./answer-picker";
 import styles from './page.module.css'
 import {useEffect, useRef, useState} from "react";
@@ -11,6 +10,9 @@ import {BarLoader} from "react-spinners";
 import {Roboto} from "next/font/google";
 import {useRouter} from "next/navigation";
 import {QuizResponse, submitResponses} from "@/app/quiz/action";
+import ReferenceToggle from "@/app/quiz/reference/referenceToggle";
+
+export const runtime = 'edge'
 
 const roboto = Roboto({weight: "300", subsets: ["latin"]})
 
@@ -79,6 +81,11 @@ export default function Quiz() {
     const {answers, updateAnswer, responses, saveResponse} = useQuizResponses()
     const router = useRouter()
     const page = useRef<HTMLDivElement>(null)
+    const [referenceVisible, setReferenceVisible] = useState(true)
+
+    useEffect(() => {
+        setReferenceVisible(true)
+    }, [gists]);
 
     if (gists.length === 0) {
         return placeholder()
@@ -145,6 +152,11 @@ export default function Quiz() {
                 <button onClick={proceedQuiz} disabled={issue !== null}>Continue to next question</button>
             </div>
         </div>
-        <button className={styles.referenceToggle}>Show reference</button>
+        <ReferenceToggle
+            label={"Show reference"}
+            onClick={() => setReferenceVisible(true)}
+            className={styles.referenceToggle}
+        />
+        <Reference gist={gist} open={referenceVisible} onClose={setReferenceVisible}/>
     </div>
 }

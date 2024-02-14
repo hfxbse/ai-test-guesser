@@ -1,0 +1,33 @@
+.referenceToggle {
+    outline: none;
+
+    padding: var(--element-padding);
+    border-radius: 8px;
+
+    border: 2px solid var(--color-text);
+
+    box-shadow: 1px 1px 3px 1px hsl(0, 0%, 50%);
+
+    font-size: 0.9rem;
+}
+
+.referenceToggle:hover, .referenceToggle:focus {
+    box-shadow: 1px 1px 3px 1px hsl(0, 0%, 15%);
+}
+
+@media (prefers-color-scheme: dark) {
+    .referenceToggle {
+        background: hsl(0, 0%, 37.5%);
+
+        border-color: hsl(0, 0%, 80%);
+        box-shadow: 1px 1px 3px 1px hsl(0, 0%, 80%);
+    }
+
+    .referenceToggle:hover, .referenceToggle:focus {
+        box-shadow: 1px 1px 3px 1px hsl(0, 0%, 100%);
+    }
+}
+
+.referenceToggle:active {
+    box-shadow: none;
+}

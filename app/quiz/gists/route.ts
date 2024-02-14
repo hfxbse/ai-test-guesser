@@ -3,6 +3,11 @@ import arrayShuffle from "array-shuffle";
 export interface Gist {
     id: string,
     gist_user: string,
+    reference: {
+        title: string,
+        description: string,
+        filename: string
+    }
     filenames: string[]
 }
 
@@ -22,11 +27,17 @@ export async function GET() {
         return {
             id: entry["gist_id"] as string,
             gist_user: entry["gist_user"] as string,
+            reference: {
+                title: entry["title"] as string,
+                description: entry["description"] as string,
+                filename: entry["file_reference"] as string
+            },
+
             // shuffle order to prevent cheating
             filenames: arrayShuffle([
                 entry["file_human"],
                 entry["file_copilot"],
-                entry["file_ai_generated"],
+                entry["file_ai_generated"]
             ] as string[])
         }
     })

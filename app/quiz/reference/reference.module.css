@@ -1,0 +1,73 @@
+.reference {
+    outline: none;
+    border: none;
+    display: none;
+}
+
+.reference[open] {
+    display: flex;
+    flex-direction: column;
+
+    --padding-bottom: calc(32px - 0.7rem - 0.5lh);
+
+    padding: var(--page-padding);
+    padding-bottom: var(--padding-bottom);
+    gap: 32px;
+
+    width: calc(100svw - 32px);
+    max-width: unset;
+
+    height: calc(100svh - 32px - var(--padding-bottom));
+    max-height: unset;
+}
+
+.reference > * {
+    max-width: 100%;
+    width: calc(var(--page-text-width) * 2 + 32px);
+    margin: auto;
+}
+
+.reference > :first-child {
+    flex: 1;
+    overflow: hidden;
+
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+}
+
+.reference > :first-child > * {
+    flex: 1 1 0;
+}
+
+.reference > :first-child > :first-child {
+    max-width: 80ch;
+}
+
+.continue {
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    gap: 0.5lh;
+}
+
+.continue > :not(button) {
+    font-size: 0.7rem;
+    line-height: 1;
+}
+
+@media (max-width: 1000px) {
+    .reference > * {
+        width: var(--page-text-width);
+    }
+
+    .reference > :first-child {
+        flex-direction: column;
+        overflow: visible;
+
+        gap: 16px;
+    }
+}

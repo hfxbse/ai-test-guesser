@@ -3,7 +3,7 @@ import 'material-symbols'
 import {Roboto} from "next/font/google";
 import RatingSelector from "@/app/components/rating-selector";
 import {FormEvent} from "react";
-import Gist from "@/app/quiz/gist";
+import Gist from "@/app/quiz/gists/gist";
 
 const roboto = Roboto({weight: "400", subsets: ["latin"]})
 
