@@ -17,7 +17,7 @@
     width: calc(100svw - 32px);
     max-width: unset;
 
-    height: calc(100svh - 32px - var(--padding-bottom));
+    height: calc(100dvh - 32px - var(--padding-bottom));
     max-height: unset;
 }
 

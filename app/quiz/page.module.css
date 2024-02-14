@@ -131,10 +131,14 @@
 
     .page {
         gap: 48px;
+
+        --toggle-height: calc(32px + 1rem + 1lh);
+        padding-bottom: calc(var(--toggle-height) + 32px);
+        height: calc(100dvh - 32px * 2 - var(--toggle-height));
     }
 
     .referenceToggle {
-        position: sticky;
-        bottom: 0;
+        position: fixed;
+        bottom: 32px;
     }
 }
