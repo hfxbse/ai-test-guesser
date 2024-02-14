@@ -12,3 +12,24 @@
     align-items: center;
     gap: 1lh;
 }
+
+.gist, .gist > div, .gist :global(.gist) {
+    height: 100%;
+}
+
+.gist :global(.gist-file) {
+    height: calc(100% - 2px /* 1px space for the border at the top and bottom */);
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.gist :global(.gist-data) {
+    flex: 1 1 0;
+    overflow: auto;
+}
+
+.gist :global(.gist-meta > :nth-child(1)), .gist :global(.gist-meta > :nth-child(2)) {
+    display: none;
+}

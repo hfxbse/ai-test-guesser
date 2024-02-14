@@ -20,23 +20,22 @@ function placeholder() {
     </div>
 }
 
-export default function Gist({id, username, file, className}: {
+export default function Gist({id, username, file}: {
     id: string,
     username: string,
     file: string,
-    className?: string
 }) {
     const SuperGist: ComponentType<{
         url: string,
         file: string,
         LoadingComponent: () => React.JSX.Element,
-        className: string | undefined
     }> = useMemo(() => dynamic(() => import('super-react-gist'), {ssr: false}), [])
 
-    return <SuperGist
-        url={`https://gist.github.com/${username}/${id}`}
-        file={file}
-        LoadingComponent={placeholder}
-        className={className}
-    />
+    return <div className={styles.gist}>
+        <SuperGist
+            url={`https://gist.github.com/${username}/${id}`}
+            file={file}
+            LoadingComponent={placeholder}
+        />
+    </div>
 }

@@ -77,26 +77,24 @@ export default function AnswerPicker({gistId, gistUsername, gistFile, setAnswer,
     const radioGroup = `${gistUsername}.${gistId}.${gistFile}.guess}`;
 
     return <div className={styles.card}>
-        <div>
-            <Gist file={gistFile} username={gistUsername} id={gistId}/>
-            <div className={styles.categorySelection} onChange={onGuessChange}>
-                {
-                    radios.map(radio =>
-                        <label key={radio.value}>
-                            <input
-                                tabIndex={0}
-                                type="radio"
-                                name={radioGroup}
-                                value={radio.value as string}
-                            />
-                            <span>
+        <Gist file={gistFile} username={gistUsername} id={gistId}/>
+        <div className={styles.categorySelection} onChange={onGuessChange}>
+            {
+                radios.map(radio =>
+                    <label key={radio.value}>
+                        <input
+                            tabIndex={0}
+                            type="radio"
+                            name={radioGroup}
+                            value={radio.value as string}
+                        />
+                        <span>
                                 <span className={iconClassName}>{radio.icon}</span>
                                 <span>{radio.label}</span>
                             </span>
-                        </label>
-                    )
-                }
-            </div>
+                    </label>
+                )
+            }
         </div>
         <textarea
             className={styles.freeText}
