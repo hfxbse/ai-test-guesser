@@ -77,4 +77,8 @@
         gap: 16px;
         align-items: stretch;
     }
+
+    .reference > :first-child > :first-child {
+        flex: 0;
+    }
 }
