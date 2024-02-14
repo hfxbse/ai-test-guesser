@@ -12,11 +12,11 @@ export default function Reference({gist, open, onClose}: {
     const ref = useRef<HTMLDialogElement>(null)
 
     useEffect(() => {
-        console.count('toggled')
-        console.dir({current: ref.current, open})
         if (open && ref.current?.open === false) ref.current?.showModal()
         else if (!open && ref.current?.open === true) ref.current?.close()
     }, [open]);
+
+    console.log(gist.reference.description.split('\n'))
 
     return <dialog
         className={styles.reference}
@@ -26,7 +26,11 @@ export default function Reference({gist, open, onClose}: {
         <div key={gist.id + gist.gist_user}>
             <div>
                 <h1>{gist.reference.title}</h1>
-                <p>{gist.reference.description}</p>
+                {
+                    gist.reference.description.split('\n').map(paragraph =>
+                        <p key={paragraph}>{paragraph}</p>
+                    )
+                }
             </div>
             <GistView file={gist.reference.filename} id={gist.id} username={gist.gist_user}/>
         </div>
