@@ -30,6 +30,8 @@
     max-width: var(--page-text-width);
 
     margin: auto;
+
+    text-align: justify;
 }
 
 .main > section:first-of-type {
