@@ -139,11 +139,12 @@ export default function Quiz() {
                 />)
             }
         </div>
-        <div>
+        <div className={styles.continue}>
             <div>
                 <span className={styles.issue}>{interacted && issue !== null ? issue : ''}</span>
                 <button onClick={proceedQuiz} disabled={issue !== null}>Continue to next question</button>
             </div>
         </div>
+        <button className={styles.referenceToggle}>Show reference</button>
     </div>
 }

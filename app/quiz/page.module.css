@@ -27,26 +27,26 @@
     gap: 16px;
 }
 
-.page > :last-child {
+.continue {
     align-self: stretch;
 
     display: grid;
     place-items: center;
 }
 
-.page > :last-child button:disabled {
+.continue button:disabled {
     opacity: 70%;
     filter: saturate(0.4);
 }
 
 @media (prefers-color-scheme: dark) {
-    .page > :last-child button:disabled {
+    .continue button:disabled {
         opacity: 50%;
         filter: saturate(0.5);
     }
 }
 
-.page > :last-child > * {
+.continue > * {
     width: 33%;
 
     display: flex;
@@ -55,7 +55,7 @@
     gap: 0.25lh;
 }
 
-.page > :last-child button {
+.continue button {
     border: none;
     color: var(--color-surface-text);
     background: var(--color-continue);
@@ -69,11 +69,11 @@
     width: 100%;
 }
 
-.page > :last-child button:not(:disabled):hover, .page > :last-child button:not(:disabled):focus-within {
+.continue button:not(:disabled):hover, .continue button:not(:disabled):focus-within {
     background: var(--color-continue-discover);
 }
 
-.page > :last-child button:not(:disabled):active {
+.continue button:not(:disabled):active {
     background: var(--color-continue-active);
 }
 
@@ -94,6 +94,49 @@
     width: 33%;
 }
 
+.issue {
+    min-height: 1lh;
+    color: var(--color-error);
+}
+
+.referenceToggle {
+    outline: none;
+
+    position: fixed;
+    bottom: 32px;
+    align-self: flex-end;
+
+    padding: var(--element-padding);
+    border-radius: 8px;
+
+    border: 1px solid var(--color-text);
+
+    box-shadow: 1px 1px 3px 1px hsl(0, 0%, 50%);
+
+    font-size: 0.9rem;
+}
+
+.referenceToggle:hover, .referenceToggle:focus {
+    box-shadow: 1px 1px 3px 1px hsl(0, 0%, 15%);
+}
+
+@media (prefers-color-scheme: dark) {
+    .referenceToggle {
+        background: hsl(0, 0%, 37.5%);
+
+        border-color: hsl(0, 0%, 80%);
+        box-shadow: 1px 1px 3px 1px hsl(0, 0%, 80%);
+    }
+
+    .referenceToggle:hover, .referenceToggle:focus {
+        box-shadow: 1px 1px 3px 1px hsl(0, 0%, 100%);
+    }
+}
+
+.referenceToggle:active {
+    box-shadow: none;
+}
+
 @media (max-width: 1850px) {
     .snippets {
         flex-direction: column;
@@ -111,7 +154,7 @@
         max-height: 85svh;
     }
 
-    .page > :last-child > * {
+    .continue > * {
         width: 100%;
         max-width: 74ch;
     }
@@ -119,9 +162,9 @@
     .page {
         gap: 48px;
     }
-}
 
-.issue {
-    min-height: 1lh;
-    color: var(--color-error);
+    .referenceToggle {
+        position: sticky;
+        bottom: 0;
+    }
 }
