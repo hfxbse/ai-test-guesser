@@ -2,8 +2,8 @@ import styles from './answer-picker.module.css'
 import 'material-symbols'
 import {Roboto} from "next/font/google";
 import RatingSelector from "@/app/components/rating-selector";
-import dynamic from "next/dynamic";
-import {ComponentType, FormEvent, useMemo} from "react";
+import {FormEvent} from "react";
+import Gist from "@/app/quiz/gist";
 
 const roboto = Roboto({weight: "400", subsets: ["latin"]})
 
@@ -72,12 +72,6 @@ export default function AnswerPicker({gistId, gistUsername, gistFile, setAnswer,
             text: text ?? answer.text
         })
     }
-
-    const Gist: ComponentType<{
-        id: string,
-        file: string,
-        username: string
-    }> = useMemo(() => dynamic(() => import('./gist'), {ssr: false}), [])
 
     const iconClassName = `${styles.icon} material-symbols-outlined`;
     const radioGroup = `${gistUsername}.${gistId}.${gistFile}.guess}`;
