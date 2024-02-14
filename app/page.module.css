@@ -30,7 +30,9 @@
     max-width: var(--page-text-width);
 
     margin: auto;
+}
 
+.main :not(h1) {
     text-align: justify;
 }
 

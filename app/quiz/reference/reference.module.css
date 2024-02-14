@@ -43,6 +43,9 @@
 
 .reference > :first-child > :first-child {
     max-width: var(--page-text-width);
+}
+
+.reference > :first-child > :first-child p {
     text-align: justify;
 }
 
