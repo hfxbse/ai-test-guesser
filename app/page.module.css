@@ -23,7 +23,7 @@
     padding: var(--page-padding);
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 24px;
 
     align-items: baseline;
 
@@ -32,16 +32,23 @@
     margin: auto;
 }
 
-.main :not(h1) {
+.main :not(h1, h2, h3) {
     text-align: justify;
 }
 
-.main > section:first-of-type {
+.main ol {
     display: flex;
     flex-direction: column;
     gap: 8px;
 
     align-items: baseline;
 
-    padding-bottom: 8px;
+    padding: var(--element-padding);
+    padding-bottom: 0;
+    padding-right: 0;
+}
+
+
+.main header h2 {
+    font-size: 1.1rem;
 }
