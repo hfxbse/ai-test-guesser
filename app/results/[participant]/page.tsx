@@ -6,6 +6,8 @@ import loadResults from "@/app/results/[participant]/action";
 import {useMemo} from "react";
 import {Metadata} from "next";
 import {metadata as layoutMeta} from "@/app/layout";
+import {EmailIcon, EmailShareButton, FacebookIcon, FacebookShareButton} from "react-share";
+import ShareButtons from "@/app/results/[participant]/share-buttons";
 
 export const runtime = 'edge'
 
@@ -71,6 +73,10 @@ export default async function Results({params}: { params: { participant: string 
                     </div>
                 )
             }
+        </div>
+        <div>
+            <h2 className={roboto.className}>Share your results</h2>
+            <ShareButtons/>
         </div>
     </div>
 }
