@@ -22,9 +22,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-continue: hsl(89, 60%, 45%);
-    --color-continue-discover: hsl(89, 60%, 35%);
-    --color-continue-active: hsl(89, 60%, 30%);
+    --color-continue: hsl(89, 60%, 35%);
+    --color-continue-discover: hsl(89, 60%, 25%);
+    --color-continue-active: hsl(89, 60%, 20%);
     --color-background: hsl(0, 0%, 15%);
     --color-text: hsl(0, 0%, 100%);
     --color-link: hsl(208, 80%, 80%);
