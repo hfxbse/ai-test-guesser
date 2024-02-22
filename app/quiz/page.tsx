@@ -149,7 +149,9 @@ export default function Quiz() {
         <div className={styles.continue}>
             <div>
                 <span className={styles.issue}>{interacted && issue !== null ? issue : ''}</span>
-                <button onClick={proceedQuiz} disabled={issue !== null}>Continue to next question</button>
+                <button onClick={proceedQuiz} disabled={issue !== null}>
+                    Continue to next question ({gists.length - 1} left)
+                </button>
             </div>
         </div>
         <ReferenceToggle
