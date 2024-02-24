@@ -29,23 +29,33 @@ export default function Home(): ReactElement {
                         another <a href={"https://www.welltested.ai/"}>AI</a>.
                     </li>
                     <li>
-                        <b>Your task is to guess which version was created by whom and rate each.</b>
-                        &nbsp;If you have any additional thoughts, feel free to add them just below the test code snippets.
+                        Your task is to <u>guess which version was created by which tool and rate each test.</u>
+                        &nbsp;If you have any additional thoughts, feel free to add them just below the test code
+                        snippets.
                     </li>
                 </ol>
             </section>
             <section>
                 <h3>What&apos;s in it for you?</h3>
                 <p>
-                    Upon completion, see your results and how you compare with others. The link to them is permanent, so
-                    share them if you would like to :)
+                    Upon completion, see <u>your results and how you compare with others.</u> The link to them is
+                    permanent, so share them if you would like to :)
                 </p>
             </section>
             <section>
                 <h3>How long will this take?</h3>
                 <p>
-                    Approximately 10 to 15 minutes. You can take a break at any time; just keep the browser tab open.
-                    There is no time limit.
+                    <u>Approximately 10 to 15 minutes.</u> You can take a break at any time; just keep the browser tab
+                    open. There is no time limit.
+                </p>
+            </section>
+            <section>
+                <h3>Is any prior knowledge required?</h3>
+                <p>
+                    <u>If you can read code, you are good to go.</u> While prior&nbsp;
+                    <a href={"https://flutter.dev/"}>Flutter</a> or <a href={"https://dart.dev/"}>Dart</a> experience
+                    may be helpful, it is not necessary, as it is similar to other programming languages like Kotlin and
+                    JavaScript, for example.
                 </p>
             </section>
             <section>
