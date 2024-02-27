@@ -45,7 +45,7 @@ export default function Home(): ReactElement {
             <section>
                 <h3>How long will this take?</h3>
                 <p>
-                    <u>Approximately 10 to 15 minutes.</u> You can take a break at any time; just keep the browser tab
+                    <u>Approximately 5 to 15 minutes.</u> You can take a break at any time; just keep the browser tab
                     open. There is no time limit.
                 </p>
             </section>
