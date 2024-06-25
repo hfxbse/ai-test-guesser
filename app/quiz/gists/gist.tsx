@@ -28,6 +28,7 @@ export default function Gist({id, username, file}: {
     const SuperGist: ComponentType<{
         url: string,
         file: string,
+        colorMode: string,
         LoadingComponent: () => React.JSX.Element,
     }> = useMemo(() => dynamic(() => import('super-react-gist'), {ssr: false}), [])
 
@@ -35,6 +36,7 @@ export default function Gist({id, username, file}: {
         <SuperGist
             url={`https://gist.github.com/${username}/${id}`}
             file={file}
+            colorMode={'auto'}
             LoadingComponent={placeholder}
         />
     </div>
