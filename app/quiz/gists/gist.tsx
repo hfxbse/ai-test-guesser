@@ -4,6 +4,8 @@ import styles from './gist.module.css'
 import React, {ComponentType, useMemo} from "react";
 import dynamic from "next/dynamic";
 
+import 'super-react-gist/styles'
+
 const roboto = Roboto({weight: "300", subsets: ["latin"]})
 
 function placeholder() {
@@ -28,6 +30,7 @@ export default function Gist({id, username, file}: {
     const SuperGist: ComponentType<{
         url: string,
         file: string,
+        colorMode: 'light'|'dark'|'auto'
         LoadingComponent: () => React.JSX.Element,
     }> = useMemo(() => dynamic(() => import('super-react-gist'), {ssr: false}), [])
 
@@ -35,6 +38,7 @@ export default function Gist({id, username, file}: {
         <SuperGist
             url={`https://gist.github.com/${username}/${id}`}
             file={file}
+            colorMode={'auto'}
             LoadingComponent={placeholder}
         />
     </div>

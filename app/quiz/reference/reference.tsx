@@ -16,8 +16,6 @@ export default function Reference({gist, open, onClose}: {
         else if (!open && ref.current?.open === true) ref.current?.close()
     }, [open]);
 
-    console.log(gist.reference.description.split('\n'))
-
     return <dialog
         className={styles.reference}
         ref={ref}

@@ -1,6 +1,6 @@
 {
   "name": "ai-code-guesser",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -20,7 +20,7 @@
     "react-icons": "^5.0.1",
     "react-share": "^5.1.0",
     "react-spinners": "^0.13.8",
-    "super-react-gist": "^1.1.1"
+    "super-react-gist": "github:hfxbse/super-react-gist#1.3.0"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.8.6",
